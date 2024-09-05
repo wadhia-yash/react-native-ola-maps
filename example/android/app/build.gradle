@@ -111,6 +111,14 @@ dependencies {
     // The version of react-native is set by the React Native Gradle Plugin
     implementation("com.facebook.react:react-android")
 
+    //OlaMap SDK
+    implementation(files("libs/OlaMapSdk-1.6.0.aar"))
+
+    //Maplibre
+    implementation ("org.maplibre.gl:android-sdk:10.0.2")
+    implementation ("org.maplibre.gl:android-plugin-annotation-v9:1.0.0")
+    implementation ("org.maplibre.gl:android-plugin-markerview-v9:1.0.0")
+
     if (hermesEnabled.toBoolean()) {
         implementation("com.facebook.react:hermes-android")
     } else {
