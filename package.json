@@ -173,7 +173,6 @@
       [
         "typescript",
         {
-          "project": "tsconfig.build.json",
           "esm": true
         }
       ]
@@ -183,5 +182,6 @@
     "type": "module-legacy",
     "languages": "kotlin-swift",
     "version": "0.41.0"
-  }
+  },
+  "types": "./lib/typescript/commonjs/src/index.d.ts"
 }
