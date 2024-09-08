@@ -1,9 +1,15 @@
-import * as React from 'react';
+import { requireNativeComponent } from 'react-native';
+import { View } from 'react-native';
 
-class MapView extends React.Component {
-  constructor(props: any) {
-    super(props);
-  }
-}
+// Use the native OlaMapView component
+const OlaMapView = requireNativeComponent('MapView');
+
+const MapView = () => {
+  return (
+    <View>
+      <OlaMapView />
+    </View>
+  );
+};
 
 export default MapView;

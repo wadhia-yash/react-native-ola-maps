@@ -5,10 +5,13 @@ buildscript {
   repositories {
     google()
     mavenCentral()
+    flatDir {
+      dir "libs"
+    }
   }
 
   dependencies {
-    classpath "com.android.tools.build:gradle:7.2.1"
+    classpath "com.android.tools.build:gradle:8.0.0"
     // noinspection DifferentKotlinGradleVersion
     classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
   }
@@ -77,8 +80,8 @@ android {
   }
 
   compileOptions {
-    sourceCompatibility JavaVersion.VERSION_1_8
-    targetCompatibility JavaVersion.VERSION_1_8
+    sourceCompatibility JavaVersion.VERSION_17
+    targetCompatibility JavaVersion.VERSION_17
   }
 }
 
@@ -93,8 +96,20 @@ dependencies {
   // For < 0.71, this will be from the local maven repo
   // For > 0.71, this will be replaced by `com.facebook.react:react-android:$version` by react gradle plugin
   //noinspection GradleDynamicVersion
-  implementation "com.facebook.react:react-native:+"
+  implementation "com.facebook.react:react-native:0.20.1"
   implementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
 
-}
+  //OlaMap SDK
+  implementation(files("libs/OlaMapSdk-1.6.0.aar"))
 
+  //Maplibre
+  implementation ("org.maplibre.gl:android-sdk:10.0.2")
+  implementation ("org.maplibre.gl:android-plugin-annotation-v9:1.0.0")
+  implementation ("org.maplibre.gl:android-plugin-markerview-v9:1.0.0")
+  implementation "androidx.lifecycle:lifecycle-extensions:2.0.0"
+  annotationProcessor "androidx.lifecycle:lifecycle-compiler:2.0.0"
+  implementation "androidx.core:core-ktx:1.10.1"
+  implementation "androidx.appcompat:appcompat:1.5.1"
+  implementation "com.google.android.material:material:1.7.0"
+  implementation "androidx.constraintlayout:constraintlayout:2.1.4"
+}
