@@ -1,6 +1,6 @@
 {
   "name": "react-native-ola-maps",
-  "version": "0.1.4",
+  "version": "0.1.5",
   "description": "react-native-ola-maps is a powerful and flexible map library for React Native applications, designed to provide seamless integration of interactive maps for both Android and iOS platforms. Built with native map SDKs (Ola Maps for Android and iOS), this library allows developers to create immersive, high-performance mapping experiences.",
   "source": "./src/index.tsx",
   "main": "./lib/commonjs/index.js",
@@ -183,5 +183,8 @@
     "languages": "kotlin-swift",
     "version": "0.41.0"
   },
-  "types": "./lib/typescript/commonjs/src/index.d.ts"
+  "types": "./lib/typescript/commonjs/src/index.d.ts",
+  "directories": {
+    "example": "example"
+  }
 }

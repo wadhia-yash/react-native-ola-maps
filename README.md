@@ -1,33 +1,63 @@
+
+
 # react-native-ola-maps
 
-react-native-ola-maps is a powerful and flexible map library for React Native applications, designed to provide seamless integration of interactive maps for both Android and iOS platforms. Built with native map SDKs (Ola Maps for Android and iOS), this library allows developers to create immersive, high-performance mapping experiences.
+React Native Ola Map components for iOS + Android
+
+## Supports
+- Android ✅
+- iOS - coming soon
+- Expo - coming soon
+
+## Contribution
+This project is being maintained by an individual, and any help with issues and pull requests are always appreciated. If you are able and willing to contribute, please read the [guidelines](./CONTRIBUTING.md).
 
 ## Installation
 
-```sh
-npm install react-native-ola-maps
-```
-
-## Usage
+See [Installation Instructions](docs/installation.md)
 
 
-```js
-import { multiply } from 'react-native-ola-maps';
+## Component API
 
-// ...
 
-const result = await multiply(3, 7);
-```
-
+[`<MapView />` Component API](docs/mapview.md)
 
 ## Contributing
 
 See the [contributing guide](CONTRIBUTING.md) to learn how to contribute to the repository and the development workflow.
+
+## General Usage
+
+```js
+import MapView from 'react-native-ola-maps';
+```
+
+or
+
+```js
+var MapView = require('react-native-ola-maps');
+```
+
+### Rendering a Map with an initial region
+## MapView
+
+```jsx
+<MapView
+  initialRegion={{
+    latitude: 37.78825,
+    longitude: -122.4324,
+    altitude: 5,
+    zoomLevel: 10,
+  }}
+/>
+```
+#### Example
+This example displays maps
+
+![](https://i.giphy.com/media/v1.Y2lkPTc5MGI3NjExYWE2Njd2MWNnczNiOGNudTMwbjUzZWxyOHE3N2hpd2V3cXpnMDJvMyZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/P91h7izxJ5kSAan7ao/giphy.gif)
 
 ## License
 
 MIT
 
 ---
-
-Made with [create-react-native-library](https://github.com/callstack/react-native-builder-bob)
