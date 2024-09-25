@@ -4,7 +4,7 @@ import type { NativeSyntheticEvent, ViewProps } from 'react-native';
 import type { Region } from './sharedTypes';
 
 // Use the native OlaMapView component
-const OlaMapView = requireNativeComponent('CliqueMap');
+const OlaMapView = requireNativeComponent('OlaMapView');
 
 export type MapViewProps = ViewProps & {
   /**

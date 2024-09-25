@@ -1,0 +1,477 @@
+// swift-interface-format-version: 1.0
+// swift-compiler-version: Apple Swift version 5.9 (swiftlang-5.9.0.128.108 clang-1500.0.40.1)
+// swift-module-flags: -target arm64-apple-ios13.0 -enable-objc-interop -enable-library-evolution -swift-version 5 -enforce-exclusivity=checked -O -module-name OlaMapCore
+// swift-module-flags-ignorable: -enable-bare-slash-regex
+import Combine
+import CoreLocation
+import DeveloperToolsSupport
+import Foundation
+import MapLibre
+import MoEngageSDK
+@_exported import OlaMapCore
+import Swift
+import SwiftUI
+import UIKit
+import _Concurrency
+import _StringProcessing
+import _SwiftConcurrencyShims
+public protocol MapInstrumentationProtocol : AnyObject {
+  func tapOnCalloutView(_ identifier: Swift.String?)
+  func didFailToLocateUser(_ error: any Swift.Error)
+  func mapWillStartLoading()
+  func mapRegionIsChanging()
+  func mapDidFailLoading(_ error: any Swift.Error)
+  func addAnnotationView(_ annotations: [MapLibre.MLNAnnotationView])
+  func mapBecameIdle()
+  func didFinishMapLoading()
+  func didFinishMapRendering(_ isRendered: Swift.Bool)
+  func didFinishMapRenderingFrame(_ isRendered: Swift.Bool)
+  func didSelectAnnotation(_ annotation: any MapLibre.MLNAnnotation)
+  func didSelectAnnotationView(_ annotationView: MapLibre.MLNAnnotationView)
+  func didFaileToLoadImage(_ imageName: Swift.String)
+  func didChangeTrackingMode(_ mode: MapLibre.MLNUserTrackingMode)
+  func regionDidChange(_ reason: MapLibre.MLNCameraChangeReason)
+  func loadAnnotationView(_ annotationView: MapLibre.MLNAnnotationView?)
+}
+extension OlaMapCore.OlaMapService {
+  public func deleteMarker(id: Swift.String)
+  public func setMarker(at coordinate: OlaMapCore.OlaCoordinate, marker: OlaMapCore.OlaMapMarker)
+  public func isOlaAnnotatinonLayer(_ id: Swift.String) -> Swift.Bool
+  public func hideMarker(_ marker: OlaMapCore.OlaMapMarker)
+}
+public enum OlaMapError : Swift.Error {
+  case noApiKey
+  case noInternet
+  case noStyle
+  case jsonParsing
+  case noMapView
+  case noMarkerID
+  case invalidPolygon
+  case custom(Swift.String)
+  public var message: Swift.String {
+    get
+  }
+}
+extension OlaMapCore.OlaMapService {
+  public func getUserCurrentCoordinate() -> OlaMapCore.OlaCoordinate?
+  public func setCurrentLocationMarkerColor(_ color: UIKit.UIColor)
+  public func addCurrentLocationButton(_ view: UIKit.UIView, imageForCurrentLocationButton: UIKit.UIImage? = nil)
+}
+@_hasMissingDesignatedInitializers public class OlaMapInstrumentation : OlaMapCore.MapInstrumentationProtocol {
+  public func tapOnCalloutView(_ identifier: Swift.String?)
+  public func didFailToLocateUser(_ error: any Swift.Error)
+  public func mapWillStartLoading()
+  public func mapRegionIsChanging()
+  public func mapDidFailLoading(_ error: any Swift.Error)
+  public func addAnnotationView(_ annotations: [MapLibre.MLNAnnotationView])
+  public func mapBecameIdle()
+  public func didFinishLoadingMapStyle()
+  public func didFailedToLoadMapStyle()
+  public func didFinishMapLoading()
+  public func didFinishMapRendering(_ isRendered: Swift.Bool)
+  public func didFinishMapRenderingFrame(_ isRendered: Swift.Bool)
+  public func didSelectAnnotation(_ annotation: any MapLibre.MLNAnnotation)
+  public func didSelectAnnotationView(_ annotationView: MapLibre.MLNAnnotationView)
+  public func didFaileToLoadImage(_ imageName: Swift.String)
+  public func didChangeTrackingMode(_ mode: MapLibre.MLNUserTrackingMode)
+  public func regionDidChange(_ reason: MapLibre.MLNCameraChangeReason)
+  public func loadAnnotationView(_ annotationView: MapLibre.MLNAnnotationView?)
+  public func logTrafficPolyline(_ encodedPolyline: Swift.String, travelAdvisory: Swift.String, count: Swift.Int)
+  public func mapLoadTime(_ time: Swift.Double)
+  @objc deinit
+}
+extension OlaMapCore.OlaMapInstrumentation {
+  public func didNavigationCompleted(wayPointName: Swift.String, description: Swift.String)
+  public func didArrivedInDestinationRegion(_ distance: Swift.Double)
+  public func willReroute(_ location: CoreLocation.CLLocation)
+  public func didReroute(_ location: CoreLocation.CLLocation)
+  public func didFailToRerouteWith(_ error: any Swift.Error)
+  public func onUpdateNavigation(_ data: [Swift.String : Any])
+  public func onDirectionData(_ data: [Swift.String : Any], origin: CoreLocation.CLLocation, destination: CoreLocation.CLLocation)
+  public func endNavigation()
+  public func mapPermissionStatus(_ status: Swift.String)
+}
+@objc @_Concurrency.MainActor(unsafe) open class OlaAnnotationView : MapLibre.MLNAnnotationView {
+  @_Concurrency.MainActor(unsafe) public init(identifier: Swift.String)
+  @_Concurrency.MainActor(unsafe) @objc required dynamic public init?(coder: Foundation.NSCoder)
+  @_Concurrency.MainActor(unsafe) public var didSelectOnAnnotation: ((_ identifier: Swift.String) -> Swift.Void)?
+  @_Concurrency.MainActor(unsafe) @objc override dynamic open func prepareForReuse()
+  @_Concurrency.MainActor(unsafe) public func addOffset(point: CoreFoundation.CGVector)
+  @_Concurrency.MainActor(unsafe) public func updateColor(_ color: UIKit.UIColor)
+  @_Concurrency.MainActor(unsafe) public func updateIdentifier(_ id: Swift.String)
+  @_Concurrency.MainActor(unsafe) public func setRotate(_ value: Swift.Double)
+  @objc deinit
+}
+@objc @_inheritsConvenienceInitializers @_hasMissingDesignatedInitializers @_Concurrency.MainActor(unsafe) public class CustomAnnotationView : OlaMapCore.OlaAnnotationView {
+  @_Concurrency.MainActor(unsafe) convenience public init(identifier: Swift.String, image: UIKit.UIImage?, color: UIKit.UIColor? = nil, opacity: CoreFoundation.CGFloat? = nil, markerView: UIKit.UIView? = nil)
+  @_Concurrency.MainActor(unsafe) convenience public init(identifier: Swift.String, image: UIKit.UIImage?, color: UIKit.UIColor? = nil, opacity: CoreFoundation.CGFloat? = nil, markerView: UIKit.UIView? = nil, rotation: Swift.Double)
+  @_Concurrency.MainActor(unsafe) @objc override dynamic public func layoutSubviews()
+  @_Concurrency.MainActor(unsafe) public func rotateBy(_ angle: Swift.Double)
+  @objc deinit
+}
+extension OlaMapCore.OlaMapService {
+  public func drawPolygon(identifier: Swift.String, _ coordinates: [OlaMapCore.OlaCoordinate], zoneColor: UIKit.UIColor? = nil, strokeColor: UIKit.UIColor? = nil, storkeWidth: CoreFoundation.CGFloat? = nil)
+  public func deletePolygon(_ polygonId: Swift.String)
+}
+extension OlaMapCore.OlaMapService {
+  public func drawCircle(id: Swift.String, centerCoordinate: OlaMapCore.OlaCoordinate, radius: Swift.Double, strokeColor: UIKit.UIColor = .systemGreen, zoneColor: UIKit.UIColor, strokeWidth: CoreFoundation.CGFloat)
+  public func deleteCircle(_ circleId: Swift.String)
+}
+public struct OlaCoordinate : Swift.Equatable, Swift.CustomStringConvertible {
+  public init(latitude: Swift.Double, longitude: Swift.Double)
+  public init(_ cooridnate: CoreLocation.CLLocationCoordinate2D)
+  public init(_ location: CoreLocation.CLLocation)
+  public var getLatitude: Swift.Double {
+    get
+  }
+  public var getLongitude: Swift.Double {
+    get
+  }
+  public var inDelimeter: Swift.String {
+    get
+  }
+  public func getCLCoordinate2D() -> CoreLocation.CLLocationCoordinate2D
+  public var description: Swift.String {
+    get
+  }
+  public static func == (lhs: OlaMapCore.OlaCoordinate, rhs: OlaMapCore.OlaCoordinate) -> Swift.Bool
+}
+public class OlaStepRoute {
+  public init(start: OlaMapCore.OlaCoordinate, end: OlaMapCore.OlaCoordinate, color: UIKit.UIColor, width: Swift.Double = 4.5)
+  @objc deinit
+}
+extension CoreLocation.CLLocationCoordinate2D {
+  public func encodedString() -> Swift.String
+  public func encodedUniqueString(_ str: Swift.String) -> Swift.String
+}
+@_hasMissingDesignatedInitializers public class OlaDistanceFormatter {
+  public class func format(_ distance: CoreLocation.CLLocationDistance) -> (absoluteValue: Swift.Double, valueInString: Swift.String)
+  @objc deinit
+}
+public protocol MapServiceProtocol {
+}
+extension OlaMapCore.OlaMapService {
+  public func setTileURL(_ url: Foundation.URL)
+  public func reloadStyle()
+}
+public enum AuthType {
+  case apiKey(key: Swift.String)
+  case mapToken(token: Swift.String)
+}
+@objc public class OlaMapService : ObjectiveC.NSObject, OlaMapCore.MapServiceProtocol {
+  weak public var delegate: (any OlaMapCore.OlaMapServiceDelegate)?
+  public var allowMapTilting: Swift.Bool {
+    get
+    set
+  }
+  public init(auth: OlaMapCore.AuthType, tileURL: Foundation.URL, projectId: Swift.String, userId: Swift.String?)
+  public init(auth: OlaMapCore.AuthType, tileURL: Foundation.URL, projectId: Swift.String)
+  public func loadMap(onView: UIKit.UIView, coordinate: OlaMapCore.OlaCoordinate? = nil, showCurrentLocationIcon: Swift.Bool = true)
+  public func refreshMap()
+  public func setDebugLogs(_ isEnabled: Swift.Bool)
+  @objc deinit
+}
+extension OlaMapCore.OlaMapService {
+  public var padding: UIKit.UIEdgeInsets? {
+    get
+    set
+  }
+  public var frame: CoreFoundation.CGRect? {
+    get
+    set
+  }
+  public var centerCoordinateOfMap: CoreLocation.CLLocationCoordinate2D? {
+    get
+  }
+  public var userLocation: CoreLocation.CLLocation? {
+    get
+  }
+  public var userLocationCoordinate: CoreLocation.CLLocationCoordinate2D? {
+    get
+  }
+}
+extension OlaMapCore.OlaMapService {
+  public func setUserLocationOnMap(_ state: Swift.Bool)
+  public func setAnnotationCalloutEnable(_ state: Swift.Bool)
+  public func setUserLocationMarkerColor(_ color: UIKit.UIColor)
+  public func setInstrumentationLogging(_ client: any OlaMapCore.OlaMapInstrumentationDelegate)
+  public func setAuth(_ auth: OlaMapCore.AuthType)
+}
+extension OlaMapCore.OlaMapService {
+  @available(iOS 13, *)
+  public func olaMapBrand() -> UIKit.UIImage?
+}
+public enum OlaMapGesture {
+  case pan
+  case oneFingerZoom
+  case pinch
+  case rotate
+  case tilt
+  case zoomIn
+  case zoomOut
+  case cancelled
+  case resetNorth
+  case programatic
+  case unknown
+  public static func == (a: OlaMapCore.OlaMapGesture, b: OlaMapCore.OlaMapGesture) -> Swift.Bool
+  public func hash(into hasher: inout Swift.Hasher)
+  public var hashValue: Swift.Int {
+    get
+  }
+}
+public enum OlaTrafficType : Swift.Codable {
+  case LOW
+  case JAM
+  case HEAVY
+  case MODERATE
+  public var text: Swift.String {
+    get
+  }
+  public func color() -> UIKit.UIColor
+  public static func == (a: OlaMapCore.OlaTrafficType, b: OlaMapCore.OlaTrafficType) -> Swift.Bool
+  public func hash(into hasher: inout Swift.Hasher)
+  public func encode(to encoder: any Swift.Encoder) throws
+  public var hashValue: Swift.Int {
+    get
+  }
+  public init(from decoder: any Swift.Decoder) throws
+}
+extension Foundation.Data {
+  public var prettyPrintedJSON: Foundation.NSString? {
+    get
+  }
+}
+public protocol OlaMapInstrumentationDelegate : AnyObject {
+  func tapOnCalloutView(_ identifier: Swift.String?)
+  func didFailToLocateUser(_ error: any Swift.Error)
+  func mapWillStartLoading()
+  func mapRegionIsChanging()
+  func mapDidFailLoading(_ error: any Swift.Error)
+  func addAnnotationView()
+  func mapBecameIdle()
+  func didFinishMapLoadingStyle()
+  func didFinishMapLoading()
+  func didFinishMapRendering(_ isRendered: Swift.Bool)
+  func didFinishMapRenderingFrame(_ isRendered: Swift.Bool)
+  func didSelectAnnotation()
+  func didSelectAnnotationView()
+  func didFaileToLoadImage(_ imageName: Swift.String)
+  func didChangeTrackingMode()
+  func regionDidChange()
+  func loadAnnotationView()
+}
+@_hasMissingDesignatedInitializers public class OLATrafficModel {
+  @objc deinit
+}
+extension OlaMapCore.OlaMapService {
+  public func isOlaAnnotation(byId id: Swift.String) -> Swift.Bool
+  public func setAnnotationMarker(at olaCoordinates: OlaMapCore.OlaCoordinate, annotationView: OlaMapCore.OlaAnnotationView, identifier: Swift.String)
+  public func removeAnnotations()
+  public func removeAnnotation(by id: Swift.String)
+}
+public enum PolylineType : Swift.Int {
+  case solid
+  case dashed
+  public init?(rawValue: Swift.Int)
+  public typealias RawValue = Swift.Int
+  public var rawValue: Swift.Int {
+    get
+  }
+}
+extension OlaMapCore.OlaMapService {
+  public func showTrafficPolyline(encodedPolyline: Swift.String, travelAdvisory: Swift.String, onCompletion: (_ polylineID: [Swift.String]) -> Swift.Void)
+}
+extension OlaMapCore.OlaMapService {
+  public func showPolyline(identifier: Swift.String, _ type: OlaMapCore.PolylineType = .solid, _ coordinates: [OlaMapCore.OlaCoordinate], _ color: UIKit.UIColor? = nil, _ width: CoreFoundation.CGFloat? = nil, _ alpha: CoreFoundation.CGFloat? = nil, _ isTrafficSupported: Swift.Bool = false)
+  public func showPolyline(_ segment: OlaMapCore.OlaStepRoute)
+  public func deletePolyline(_ polylineId: Swift.String)
+}
+public class OlaMapMarker {
+  public var imageName: Swift.String?
+  public var identifier: Swift.String
+  public var title: Swift.String?
+  public var image: UIKit.UIImage?
+  public init(identifier: Swift.String?, title: Swift.String?, image: UIKit.UIImage?, imageName: Swift.String?)
+  public func removeMarker()
+  @objc deinit
+}
+@_hasMissingDesignatedInitializers public class MapUtility {
+  public class func calculateStraightDistance(_ to: OlaMapCore.OlaCoordinate, from: OlaMapCore.OlaCoordinate) -> Swift.Double
+  public class func loadMockJSON(_ fileName: Swift.String) -> Foundation.Data?
+  public class func toDictionary(data: Foundation.Data) -> [Swift.String : Any]?
+  public class func createArcPolyline(startPoint: CoreLocation.CLLocationCoordinate2D, toEnd endPoint: CoreLocation.CLLocationCoordinate2D, withAngle angle: Swift.Float) -> [CoreLocation.CLLocationCoordinate2D]
+  @objc deinit
+}
+extension OlaMapCore.MapUtility {
+  public class func decodePolyline(_ encodedPolyline: Swift.String, precision: Swift.Double = 10) -> [CoreLocation.CLLocationCoordinate2D]?
+  public class func getHeadingForDirection(from: CoreLocation.CLLocationCoordinate2D, to: CoreLocation.CLLocationCoordinate2D) -> Swift.Double
+  public class func getUncommonRoute(_ route1: [OlaMapCore.OlaCoordinate], _ route2: [OlaMapCore.OlaCoordinate]) -> ([OlaMapCore.OlaCoordinate], [OlaMapCore.OlaCoordinate])
+  public static func willIntersect(_ point11: OlaMapCore.OlaCoordinate, _ point12: OlaMapCore.OlaCoordinate, _ point21: OlaMapCore.OlaCoordinate, _ point22: OlaMapCore.OlaCoordinate) -> Swift.Bool
+}
+@objc @_inheritsConvenienceInitializers @_hasMissingDesignatedInitializers @_Concurrency.MainActor(unsafe) public class CabAnnotationView : OlaMapCore.OlaAnnotationView {
+  @_Concurrency.MainActor(unsafe) convenience public init(identifier: Swift.String, cabImage: UIKit.UIImage?, color: UIKit.UIColor? = nil, opacity: CoreFoundation.CGFloat? = nil, markerView: UIKit.UIView? = nil)
+  @_Concurrency.MainActor(unsafe) convenience public init(identifier: Swift.String, cabImage: UIKit.UIImage?, color: UIKit.UIColor? = nil, opacity: CoreFoundation.CGFloat? = nil, markerView: UIKit.UIView? = nil, rotation: Swift.Double)
+  @_Concurrency.MainActor(unsafe) @objc override dynamic public func layoutSubviews()
+  @_Concurrency.MainActor(unsafe) public func rotateBy(_ angle: Swift.Double)
+  @_Concurrency.MainActor(unsafe) @objc override dynamic public func setSelected(_ selected: Swift.Bool, animated: Swift.Bool)
+  @objc deinit
+}
+extension OlaMapCore.OlaMapService : MapLibre.MLNMapViewDelegate {
+  @objc dynamic public func mapView(_ mapView: MapLibre.MLNMapView, tapOnCalloutFor annotation: any MapLibre.MLNAnnotation)
+  @objc dynamic public func mapView(_ mapView: MapLibre.MLNMapView, didFailToLocateUserWithError error: any Swift.Error)
+  @objc dynamic public func mapViewWillStartLoadingMap(_ mapView: MapLibre.MLNMapView)
+  @objc dynamic public func mapViewRegionIsChanging(_ mapView: MapLibre.MLNMapView)
+  @objc dynamic public func mapViewDidFailLoadingMap(_ mapView: MapLibre.MLNMapView, withError error: any Swift.Error)
+  @objc dynamic public func mapView(_ mapView: MapLibre.MLNMapView, didAdd annotationViews: [MapLibre.MLNAnnotationView])
+  @objc dynamic public func mapViewDidBecomeIdle(_ mapView: MapLibre.MLNMapView)
+  @objc dynamic public func mapView(_ mapView: MapLibre.MLNMapView, regionDidChangeWith reason: MapLibre.MLNCameraChangeReason, animated: Swift.Bool)
+  @objc dynamic public func mapView(_ mapView: MapLibre.MLNMapView, didChangeLocationManagerAuthorization manager: any MapLibre.MLNLocationManager)
+  @objc dynamic public func mapView(_ mapView: MapLibre.MLNMapView, regionDidChangeAnimated animated: Swift.Bool)
+  @objc dynamic public func mapView(_ mapView: MapLibre.MLNMapView, didChange mode: MapLibre.MLNUserTrackingMode, animated: Swift.Bool)
+  @objc dynamic public func mapView(_ mapView: MapLibre.MLNMapView, didFailToLoadImage imageName: Swift.String) -> UIKit.UIImage?
+  @objc dynamic public func mapView(_ mapView: MapLibre.MLNMapView, didFinishLoading style: MapLibre.MLNStyle)
+  @objc dynamic public func mapViewDidFinishLoadingMap(_ mapView: MapLibre.MLNMapView)
+  @objc dynamic public func mapViewDidFinishRenderingMap(_ mapView: MapLibre.MLNMapView, fullyRendered: Swift.Bool)
+  @objc dynamic public func mapViewDidFinishRenderingFrame(_ mapView: MapLibre.MLNMapView, fullyRendered: Swift.Bool)
+  @objc dynamic public func mapView(_ mapView: MapLibre.MLNMapView, viewFor annotation: any MapLibre.MLNAnnotation) -> MapLibre.MLNAnnotationView?
+  @objc dynamic public func mapView(_ mapView: MapLibre.MLNMapView, annotationCanShowCallout annotation: any MapLibre.MLNAnnotation) -> Swift.Bool
+  @objc dynamic public func mapView(_ mapView: MapLibre.MLNMapView, strokeColorForShapeAnnotation annotation: MapLibre.MLNShape) -> UIKit.UIColor
+  @objc dynamic public func mapView(_ mapView: MapLibre.MLNMapView, lineWidthForPolylineAnnotation annotation: MapLibre.MLNPolyline) -> CoreFoundation.CGFloat
+  @objc dynamic public func mapView(_ mapView: MapLibre.MLNMapView, alphaForShapeAnnotation annotation: MapLibre.MLNShape) -> CoreFoundation.CGFloat
+  @objc dynamic public func mapView(_ mapView: MapLibre.MLNMapView, fillColorForPolygonAnnotation annotation: MapLibre.MLNPolygon) -> UIKit.UIColor
+  @objc dynamic public func mapView(_ mapView: MapLibre.MLNMapView, didSelect annotation: any MapLibre.MLNAnnotation)
+  @objc dynamic public func mapView(_ mapView: MapLibre.MLNMapView, didSelect annotationView: MapLibre.MLNAnnotationView)
+  @objc dynamic public func mapView(_ mapView: MapLibre.MLNMapView, shouldChangeFrom oldCamera: MapLibre.MLNMapCamera, to newCamera: MapLibre.MLNMapCamera) -> Swift.Bool
+  @objc dynamic public func mapView(_ mapView: MapLibre.MLNMapView, regionIsChangingWith reason: MapLibre.MLNCameraChangeReason)
+}
+public enum NavigationTrackingMode {
+  case modeNone
+  case modeFollow
+  case followWithHeading
+  case followWithCourse
+  public static func == (a: OlaMapCore.NavigationTrackingMode, b: OlaMapCore.NavigationTrackingMode) -> Swift.Bool
+  public func hash(into hasher: inout Swift.Hasher)
+  public var hashValue: Swift.Int {
+    get
+  }
+}
+public protocol OlaMapServiceDelegate : AnyObject {
+  func mapViewDidChange(gesture: OlaMapCore.OlaMapGesture)
+  func mapViewDidBecomeIdle()
+  func didChangeLocationManagerAuthorization(_ state: CoreLocation.CLAuthorizationStatus)
+  func regionDidChangeAnimated()
+  func didChangeCamera()
+  func regionIsChanging(_ gesture: OlaMapCore.OlaMapGesture)
+  func didAddAnnotationViewsOnMap()
+  func regionDidChangeAnimated(_ mode: OlaMapCore.NavigationTrackingMode)
+  func didTapOnMap(_ coordinate: OlaMapCore.OlaCoordinate)
+  func didTapOnMap(feature: OlaMapCore.POIModel)
+  func didLongTapOnMap(_ coordinate: OlaMapCore.OlaCoordinate)
+  func didRouteSelected(_ overviewPolyline: Swift.String)
+  func mapFailedToLoad(_ error: any Swift.Error)
+  func mapSuccessfullyLoaded()
+  func mapSuccessfullyLoadedStyle()
+  func didSelectAnnotationView(_ annotationId: Swift.String)
+}
+extension OlaMapCore.OlaMapServiceDelegate {
+  public func mapViewDidChange(gesture: OlaMapCore.OlaMapGesture)
+  public func mapViewDidBecomeIdle()
+  public func didAddAnnotationViewsOnMap()
+  public func didChangeLocationManagerAuthorization(_ state: CoreLocation.CLAuthorizationStatus)
+  public func regionDidChangeAnimated()
+  public func regionDidChangeAnimated(_ mode: OlaMapCore.NavigationTrackingMode)
+  public func didTapOnMap(_ coordinate: OlaMapCore.OlaCoordinate)
+  public func didLongTapOnMap(_ coordinate: OlaMapCore.OlaCoordinate)
+  public func didRouteSelected(_ overviewPolyline: Swift.String)
+  public func mapSuccessfullyLoaded()
+  public func mapSuccessfullyLoadedStyle()
+  public func didSelectAnnotationView(_ annotationId: Swift.String)
+  public func didTapOnMap(feature: OlaMapCore.POIModel)
+}
+extension OlaMapCore.OlaMapService {
+  public func recenterMapToUserLocation(zoomLevel: Swift.Double?)
+  public func setCamera(at coordinate: OlaMapCore.OlaCoordinate, zoomLevel: Swift.Double?)
+  public func setMapCamera(_ altitude: Swift.Double, _ pitch: Swift.Double, heading: Swift.Double)
+  public func setMapCamera(_ coordinate: OlaMapCore.OlaCoordinate, _ zoom: Swift.Double, _ heading: Swift.Double, _ altitude: Swift.Double)
+  public func setMapCamera(_ coordinates: [OlaMapCore.OlaCoordinate], isAnimated: Swift.Bool?)
+  public func setMapCamera(_ coordinates: [OlaMapCore.OlaCoordinate], _ edgePadding: UIKit.UIEdgeInsets = UIEdgeInsets(top: 30, left: 30, bottom: 30, right: 30))
+  public func setMapCamera(coordinate: OlaMapCore.OlaCoordinate, _ edgePadding: UIKit.UIEdgeInsets = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0))
+}
+extension OlaMapCore.OlaMapService {
+  public func getZoomLevel() -> Swift.Double
+  public func setZoomLevel(_ zoomLevel: Swift.Double)
+  public func setMinimumZoomLevel(_ zoomLevel: Swift.Double)
+  public func setMaxZoomLevel(_ zoom: Swift.Double)
+}
+extension OlaMapCore.OlaMapService {
+  public func clearPOIs()
+  public func disablePOIs()
+  public func enablePOIs()
+}
+extension Foundation.NSNotification.Name {
+  public static let olaMapDebugLogs: Foundation.Notification.Name
+  public static let olaMapInfoLogs: Foundation.Notification.Name
+}
+@_hasMissingDesignatedInitializers public class MapRouteHelper {
+  @objc deinit
+}
+public struct ClusterMarker {
+  public var markerId: Swift.String
+  public var image: UIKit.UIImage
+  public var coordinate: OlaMapCore.OlaCoordinate
+  public init(markerId: Swift.String, image: UIKit.UIImage, coordinate: OlaMapCore.OlaCoordinate)
+}
+public struct ClusterViewDecorator {
+  public var backgroundColor: UIKit.UIColor
+  public var opacity: Swift.Double
+  public var radius: Swift.Double
+  public var cluserViewRadius: Swift.Double
+  public var borderWidth: Swift.Double
+  public var borderColor: UIKit.UIColor
+  public var fontSize: Swift.Double
+  public var fontColor: UIKit.UIColor
+  public init(backgroundColor: UIKit.UIColor, opacity: Swift.Double, radius: Swift.Double, cluserViewRadius: Swift.Double, borderWidth: Swift.Double, borderColor: UIKit.UIColor, fontSize: Swift.Double, fontColor: UIKit.UIColor)
+}
+extension OlaMapCore.OlaMapService {
+  public func drawClusterMarker(_ markers: [OlaMapCore.ClusterMarker], clusterDecorator: OlaMapCore.ClusterViewDecorator)
+  public func clearCluster()
+}
+extension Foundation.URLRequest {
+  public func cURL(pretty: Swift.Bool = false) -> Swift.String
+}
+public struct POIModel {
+  public var categoryName: Swift.String?
+  public var categoryType: Swift.String?
+  public var name: Swift.String?
+  public var placeId: Swift.String?
+  public var subClass: Swift.String?
+  public var url: Swift.String?
+  public var scr: Swift.String?
+  public let location: OlaMapCore.OlaCoordinate
+}
+extension OlaMapCore.OlaMapService {
+  public func setRotatingGesture(_ state: Swift.Bool)
+}
+public struct InfoAnnotationDecorator {
+  public let font: UIKit.UIFont
+  public let labelActiveColor: UIKit.UIColor
+  public let labelInactiveColor: UIKit.UIColor
+  public let activeBackgroudColor: UIKit.UIColor
+  public let inactiveBackgroundColor: UIKit.UIColor
+  public let height: CoreFoundation.CGFloat
+  public let cornerRadius: CoreFoundation.CGFloat
+  public init(font: UIKit.UIFont = UIFont.systemFont(ofSize: 16, weight: .medium), labelActiveColor: UIKit.UIColor = .black, labelInactiveColor: UIKit.UIColor = .white, activeBackgroudColor: UIKit.UIColor = .white, inactiveBackgroundColor: UIKit.UIColor = .gray, height: CoreFoundation.CGFloat = 32.0, cornerRadius: CoreFoundation.CGFloat = 4.0)
+}
+@objc @_inheritsConvenienceInitializers @_hasMissingDesignatedInitializers @_Concurrency.MainActor(unsafe) public class InfoAnnotationView : OlaMapCore.OlaAnnotationView {
+  @_Concurrency.MainActor(unsafe) convenience public init(identifier: Swift.String, model: OlaMapCore.InfoAnnotationDecorator, text: Swift.String, isActive: Swift.Bool)
+  @objc deinit
+}
+extension OlaMapCore.OlaMapGesture : Swift.Equatable {}
+extension OlaMapCore.OlaMapGesture : Swift.Hashable {}
+extension OlaMapCore.OlaTrafficType : Swift.Equatable {}
+extension OlaMapCore.OlaTrafficType : Swift.Hashable {}
+extension OlaMapCore.PolylineType : Swift.Equatable {}
+extension OlaMapCore.PolylineType : Swift.Hashable {}
+extension OlaMapCore.PolylineType : Swift.RawRepresentable {}
+extension OlaMapCore.NavigationTrackingMode : Swift.Equatable {}
+extension OlaMapCore.NavigationTrackingMode : Swift.Hashable {}

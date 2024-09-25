@@ -1,0 +1,6 @@
+framework module OlaMapCore {
+  umbrella header "OlaMapCore.h"
+  export *
+
+  module * { export * }
+}

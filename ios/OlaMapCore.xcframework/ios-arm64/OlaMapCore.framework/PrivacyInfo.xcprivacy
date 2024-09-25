@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>AppConfiguration</key>
+	<dict>
+		<key>UsageDescriptions</key>
+		<dict>
+			<key>NSLocationWhenInUseUsageDescription</key>
+			<dict>
+				<key>Text</key>
+				<string>We need your location to provide you with better navigation experience</string>
+			</dict>
+			<key>NSAnalyticsCollectionUsageDescription</key>
+			<dict>
+				<key>Text</key>
+				<string>We collect data to improve our app user experience</string>
+			</dict>
+		</dict>
+	</dict>
+</dict>
+</plist>
