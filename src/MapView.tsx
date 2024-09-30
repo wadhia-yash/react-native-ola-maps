@@ -15,6 +15,12 @@ export type MapViewProps = ViewProps & {
    * Callback that is called once the map is ready.
    */
   onMapReady?: (event?: NativeSyntheticEvent<{}>) => void;
+  /**
+   * This is iOS related feature.
+   * The tile url helps you to style the maps. For more information follow the link.
+   * https://maps.olakrutrim.com/apidocs/tiles
+   */
+  tileUrl?: string;
 };
 
 const MapView = (props: MapViewProps) => {
@@ -25,6 +31,7 @@ const MapView = (props: MapViewProps) => {
       onMapReady();
     }
   }, [onMapReady]);
+  console.log('tile', props);
 
   return (
     <View style={{ flex: 1, backgroundColor: 'green' }}>

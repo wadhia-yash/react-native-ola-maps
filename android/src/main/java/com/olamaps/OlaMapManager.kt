@@ -12,7 +12,7 @@ import com.facebook.react.uimanager.annotations.ReactProp
 import com.facebook.react.uimanager.events.RCTEventEmitter
 
 class OlaMapManager(reactContext: ReactApplicationContext): SimpleViewManager<MapView>() {
-  private val REACT_CLASS: String = "CliqueMap"
+  private val REACT_CLASS: String = "OlaMapView"
 
   override fun getName(): String {
     return REACT_CLASS
