@@ -26,6 +26,7 @@ target 'OlaMapsExample' do
   target 'OlaMapsExampleTests' do
     inherit! :complete
     # Pods for testing
+    pod 'OlaMaps', :git => 'https://github.com/wadhia-yash/ola-maps-pods.git'
   end
 
   post_install do |installer|

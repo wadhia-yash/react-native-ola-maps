@@ -11,6 +11,7 @@ export default function App() {
           altitude: 5,
           zoomLevel: 10,
         }}
+        tileUrl="https://api.olamaps.io/tiles/vector/v1/styles/default-light-standard/style.json?key=0.4.0"
       />
     </View>
   );

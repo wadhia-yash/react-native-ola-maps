@@ -5,7 +5,9 @@
 	<key>CFBundleDevelopmentRegion</key>
 	<string>en</string>
 	<key>OlaMapAPIKey</key>
-	<string>pQlcw24WCUbck9rpGLrMl2gkf9y3h7J4nfVLGP7p</string>
+	<string>YOUR OLA MAP API KEY HERE HERE</string>
+	<key>OlaMapProjectId</key>
+	<string>YOUR OLA MAP PROJECT ID HERE</string>
 	<key>CFBundleDisplayName</key>
 	<string>OlaMapsExample</string>
 	<key>CFBundleExecutable</key>
