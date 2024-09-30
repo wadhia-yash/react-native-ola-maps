@@ -23,4 +23,38 @@ Add your API key to your manifest file (`android/app/src/main/AndroidManifest.xm
 </application>
 ```
 
+---
+
+## iOS
+
+After installing the npm package, we need to install the pod.
+
+```sh
+$ cd ios && pod install
+```
+
+### Enabling Ola Maps
+Add your API key and Project ID to your Info.plist file (`ios/<ProjectName>/Info.plist`)
+
+```xml
+<plist version="1.0">
+        <dict>
+                <key>OlaMapAPIKey</key>
+	        <string>YOUR OLA MAP API KEY HERE HERE</string>
+	        <key>OlaMapProjectId</key>
+	        <string>YOUR OLA MAP PROJECT ID HERE</string>
+        </dict>
+</plist>
+```
+
+### Pod Installation
+
+```ruby
+  target 'OlaMapsExampleTests' do
+    inherit! :complete
+    # Add the following pod to access ola maps pod
+    pod 'OlaMaps', :git => 'https://github.com/wadhia-yash/ola-maps-pods.git'
+  end
+```
+
 You've made it 👍. More things are coming into the picture

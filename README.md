@@ -6,7 +6,7 @@ React Native Ola Map components for iOS + Android
 
 ## Supports
 - Android ✅
-- iOS - coming soon
+- iOS ✅
 - Expo - coming soon
 
 ## Contribution
